@@ -71,7 +71,12 @@ export default class Three extends React.Component {
 
   initializeLights() {
     this.ambientLight = new THREE.DirectionalLight(0x9090aa);
-    this.ambientLight.position.set(-10, 10, -10);
+    this.ambientLight.position.set(-10, 10, -10).normalize();
+    this.scene.add(this.ambientLight);
+
+    var light = new THREE.HemisphereLight(0xffffff, 0x444444);
+    light.position.set(1, 1, 1);
+    this.scene.add(light);
   }
 
   initializeMaterials() {
@@ -80,21 +85,25 @@ export default class Three extends React.Component {
     this.sphereMaterial = [];
 
     for (var i = 0; i < 8; i++) {
-      let mat = new THREE.MeshBasicMaterial({ color: colors[i]});
+      let mat = new THREE.MeshLambertMaterial({ color: colors[i] });
       this.sphereMaterial.push(mat);
     }
+
+    this.cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xdddddd });
+    this.cubeMaterial.wireframe = true;
   }
 
   initializeObjects() {
     const bet = 0.7;
     const offset = (((8 - 1) * bet) * 0.5);
 
+    let geometry = new THREE.IcosahedronBufferGeometry(0.3, 2);
+
     for (var i = 0; i < 8; i++) {
       for (var j = 0; j < 8; j++) {
         for (var k = 0; k < 8; k++) {
-          let g = new THREE.SphereGeometry(0.3);
           let m = this.sphereMaterial[Math.floor(Math.random() * 8)];
-          let s = new THREE.Mesh(g, m);
+          let s = new THREE.Mesh(geometry, m);
           s.position.set(((i * bet) - offset), ((j * bet) - offset), ((k * bet) - offset));
 
           this.models.push(s);
@@ -103,7 +112,9 @@ export default class Three extends React.Component {
       }
     }
 
-    // TODO: Cube wireframe
+    this.cube = new THREE.CubeGeometry(18, 18, 18, 4, 4, 4);
+    this.cubeMesh = new THREE.Mesh(this.cube, this.cubeMaterial);
+    this.scene.add(this.cubeMesh);
 
     this.cameraController.models = this.models;
 
