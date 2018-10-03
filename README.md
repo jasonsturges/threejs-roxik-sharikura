@@ -3,7 +3,7 @@ Recreation of Roxik Sharikura performance example in Three.js
 
 Note: This port is still in progress.  Check back for updates.
 
-![screen capture](http://labs.jasonsturges.com/three.js/threejs-roxik-example.png)
+![screen capture](http://labs.jasonsturges.com/three.js/threejs-roxik-demo.png)
 
 
 ## Getting started
