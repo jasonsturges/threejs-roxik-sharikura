@@ -3,7 +3,7 @@ import CameraController from './CameraController';
 import MotionController from './MotionController';
 import * as THREE from 'three';
 
-export default class Three extends React.Component {
+export default class Roxik extends React.Component {
 
   /**
    * Constructor
