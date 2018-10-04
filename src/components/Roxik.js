@@ -127,6 +127,7 @@ export default class Roxik extends React.Component {
   }
 
   initializeListeners() {
+    document.addEventListener("keydown", this.keydownHandler.bind(this));
   }
 
   /**
@@ -151,6 +152,40 @@ export default class Roxik extends React.Component {
       width: window.innerWidth,
       height: window.innerHeight
     });
+  }
+
+  keydownHandler(event) {
+    var keyCode = event.which;
+    switch (keyCode) {
+      case 49:
+      case 97:
+        this.motionController.changeScene(this.motionController.CYLINDER);
+        break;
+      case 50:
+      case 98:
+        this.motionController.changeScene(this.motionController.SPHERE);
+        break;
+      case 51:
+      case 99:
+        this.motionController.changeScene(this.motionController.CUBE);
+        break;
+      case 52:
+      case 100:
+        this.motionController.changeScene(this.motionController.TUBE);
+        break;
+      case 53:
+      case 101:
+        this.motionController.changeScene(this.motionController.WAVE);
+        break;
+      case 54:
+      case 102:
+        this.motionController.changeScene(this.motionController.GRAVITY);
+        break;
+      case 55:
+      case 103:
+        this.motionController.changeScene(this.motionController.ANTIGRAVITY);
+        break;
+    }
   }
 
   /**

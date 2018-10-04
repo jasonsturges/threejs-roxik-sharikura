@@ -34,7 +34,7 @@ export default class MotionController {
       this.sceneLimit = limit;
     }
 
-    switch (scene) {
+    switch (this.scene) {
       case this.CYLINDER:
         this.cylinder();
         break;
@@ -145,25 +145,6 @@ export default class MotionController {
         }
       }
     }
-
-    var n = 0;
-    while (n < this.models.length) {
-      var m = this.models[n];
-      m.speed = 0;
-      m.accel = a;
-      m.animate = false;
-      m.dest = new THREE.Vector3();
-      m.dir = new THREE.Vector3();
-
-      m.dir.x = ((Math.random() * 1) - 0.5);
-      m.dir.y = ((Math.random() * 1) - 0.5);
-      m.dir.z = ((Math.random() * 1) - 0.5);
-      m.dest.x = ((Math.random() * 14) - 7);
-      m.dest.y = ((Math.random() * 14) - 7);
-      m.dest.z = ((Math.random() * 14) - 7);
-
-      n++;
-    }
   }
 
   tube() {
@@ -271,7 +252,10 @@ export default class MotionController {
     let m = null;;
 
     switch (this.scene) {
-      case this.CYLINDER, this.SPHERE, this.CUBE, this.TUBE:
+      case this.CYLINDER:
+      case this.SPHERE:
+      case this.CUBE:
+      case this.TUBE:
         for (let i = 0; i < this.cutoff; i++) {
           m = this.models[i];
 
