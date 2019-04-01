@@ -279,7 +279,7 @@ export default class MotionController {
           }
         }
 
-        let maxp = Math.floor(this.models.length / 40);
+        var maxp = Math.floor(this.models.length / 40);
         this.cutoff += maxp;
         if (this.cutoff > this.models.length)
           this.cutoff = this.models.length;
