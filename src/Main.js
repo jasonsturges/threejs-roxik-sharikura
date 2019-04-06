@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { NavLink, Switch, Route } from 'react-router-dom';
-import Home from './container/Home';
+import React from 'react';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import Home from './containers/Home';
 
 const Main = () => (
-  <Switch>
-    <Route exact path='/' component={Home}></Route>
-  </Switch>
+  <BrowserRouter>
+    <Switch>
+      <Route exact path='/' component={Home}></Route>
+    </Switch>
+  </BrowserRouter>
 );
 
 export default Main;

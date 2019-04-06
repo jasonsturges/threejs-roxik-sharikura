@@ -86,20 +86,20 @@ export default class MotionController {
   }
 
   sphere() {
-    var s = 0;
-    var c = 0;
-    var r = ((Math.PI * 2) / this.models.length);
-    var d = r * (Math.floor((Math.random() * 40) + 1));
-    var d2 = (Math.random() * 5) + 3;
+    let s = 0;
+    let c = 0;
+    const r = ((Math.PI * 2) / this.models.length);
+    const d = r * (Math.floor((Math.random() * 40) + 1));
+    const d2 = (Math.random() * 5) + 3;
 
     for (let i = 0; i < this.models.length; i++) {
-      var m = this.models[i];
+      const m = this.models[i];
       m.speed = 0;
       m.accel = (Math.random() * 0.05) + 0.022;
       m.animate = false;
       m.dest = new THREE.Vector3();
 
-      var d1 = (Math.cos(s) * d2);
+      const d1 = (Math.cos(s) * d2);
 
       if (Math.random() > 0.06) {
         m.dest.x = Math.cos(c) * d1;
@@ -117,9 +117,9 @@ export default class MotionController {
   }
 
   cube() {
-    var a = ((Math.random() * 0.05) + 0.022);
-    var n = 0;
-    var l = 1;
+    const a = ((Math.random() * 0.05) + 0.022);
+    let n = 0;
+    let l = 1;
 
     while (true) {
       if (((l * l) * l) > this.models.length) {
@@ -133,7 +133,7 @@ export default class MotionController {
     for (let i = 0; i < l; i++) {
       for (let j = 0; j < l; j++) {
         for (let k = 0; k < l; k++) {
-          var m = this.models[n++];
+          const m = this.models[n++];
           m.speed = 0;
           m.accel = a;
           m.animate = false;
@@ -148,13 +148,13 @@ export default class MotionController {
   }
 
   tube() {
-    var a = ((Math.random() * 0.05) + 0.022);
-    var v = (0.02 + (Math.random() * 0.025));
-    var dx = ((-(v) * this.models.length) * 0.44);
-    var d = (1.2 + (Math.random() * 1));
+    const a = ((Math.random() * 0.05) + 0.022);
+    const v = (0.02 + (Math.random() * 0.025));
+    const dx = ((-(v) * this.models.length) * 0.44);
+    const d = (1.2 + (Math.random()));
 
     for (let i = 0; i < this.models.length; i++) {
-      var m = this.models[i];
+      const m = this.models[i];
       m.speed = 0;
       m.accel = a;
       m.animate = false;
@@ -173,26 +173,27 @@ export default class MotionController {
   }
 
   wave() {
-    var a = (Math.random() * 0.05) + 0.022;
-    var n = 0;
-    var l = Math.floor(Math.sqrt(this.models.length));
-    var d = ((-((l - 1)) * 0.55) * 0.5);
-    var r = 0;
-    var t = (Math.random() * 0.3) + 0.05;
-    var s = (Math.random() * 1) + 1;
+    let m;
+    const a = (Math.random() * 0.05) + 0.022;
+    let n = 0;
+    const l = Math.floor(Math.sqrt(this.models.length));
+    const d = ((-((l - 1)) * 0.55) * 0.5);
+    let r = 0;
+    const t = (Math.random() * 0.3) + 0.05;
+    const s = Math.random() + 1;
 
     this.r = 0;
     this.r0 = 0;
-    this.rl = (Math.random() * 1) + 1;
+    this.rl = Math.random() + 1;
     this.rp = (Math.random() * 0.3) + 0.1;
 
     for (let i = 0; i < l; i++) {
-      var ty = Math.cos(r) * s;
+      const ty = Math.cos(r) * s;
       r += t;
 
       for (let j = 0; j < l; j++) {
         n += 1;
-        var m = this.models[n - 1];
+        m = this.models[n - 1];
         m.speed = 0;
         m.accel = a;
         m.animate = false;
@@ -207,7 +208,7 @@ export default class MotionController {
     }
 
     while (n < this.models.length) {
-      var m = this.models[n];
+      m = this.models[n];
       m.speed = 0;
       m.accel = a;
       m.animate = false;
@@ -224,7 +225,7 @@ export default class MotionController {
     this.sceneLimit = 60;
 
     for (let i = 0; i < this.models.length; i++) {
-      var m = this.models[i];
+      const m = this.models[i];
       m.dir = new THREE.Vector3();
 
       m.speed = 0;
@@ -236,7 +237,7 @@ export default class MotionController {
 
   antigravity() {
     for (let i = 0; i < this.models.length; i++) {
-      var m = this.models[i];
+      const m = this.models[i];
       m.speed = 0;
       m.accel = 0.5;
       m.animate = false;
@@ -249,8 +250,9 @@ export default class MotionController {
   }
 
   step() {
-    let m = null;;
+    let m = null;
 
+    let maxp;
     switch (this.scene) {
       case this.CYLINDER:
       case this.SPHERE:
@@ -275,11 +277,11 @@ export default class MotionController {
               m.position.x = m.dest.x;
               m.position.y = m.dest.y;
               m.position.z = m.dest.z;
-            };
+            }
           }
         }
 
-        var maxp = Math.floor(this.models.length / 40);
+        maxp = Math.floor(this.models.length / 40);
         this.cutoff += maxp;
         if (this.cutoff > this.models.length)
           this.cutoff = this.models.length;
@@ -314,7 +316,7 @@ export default class MotionController {
           m.position.z = (m.position.z + ((m.dest.z - m.position.z) * m.speed));
         }
 
-        var maxp = Math.floor(this.models.length / 40);
+        maxp = Math.floor(this.models.length / 40);
         this.cutoff += maxp;
         if (this.cutoff > this.models.length)
           this.cutoff = this.models.length;

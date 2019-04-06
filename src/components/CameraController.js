@@ -8,7 +8,7 @@ export default class CameraController {
 
     this.frame = 1000;
     this.sceneLimit = 90;
-    this.tm;
+    this.tm = null;
     this.target = new THREE.Vector3(0, 0, 0);
     this.cs = 0;
     this.gy = 0;

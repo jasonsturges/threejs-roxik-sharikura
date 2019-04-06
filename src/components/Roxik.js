@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CameraController from './CameraController';
 import MotionController from './MotionController';
 import * as THREE from 'three';
@@ -74,17 +74,16 @@ export default class Roxik extends React.Component {
     this.ambientLight.position.set(-10, 10, -10).normalize();
     this.scene.add(this.ambientLight);
 
-    var light = new THREE.HemisphereLight(0xffffff, 0x444444);
+    const light = new THREE.HemisphereLight(0xffffff, 0x444444);
     light.position.set(1, 1, 1);
     this.scene.add(light);
   }
 
   initializeMaterials() {
     const colors = [0x97350b, 0x266ea5, 0x00847f, 0x2f818e, 0x08917c, 0x08917c, 0x6b458c, 0x7a4526];
-    const ambient = [0xff6109, 0x4ebeff, 0x05edec, 0x5deeff, 0x0cffe7, 0xe67ae4, 0xb476ea, 0xf78849];
     this.sphereMaterial = [];
 
-    for (var i = 0; i < 8; i++) {
+    for (let i = 0; i < 8; i++) {
       let mat = new THREE.MeshLambertMaterial({ color: colors[i] });
       this.sphereMaterial.push(mat);
     }
@@ -99,9 +98,9 @@ export default class Roxik extends React.Component {
 
     let geometry = new THREE.IcosahedronBufferGeometry(0.3, 2);
 
-    for (var i = 0; i < 8; i++) {
-      for (var j = 0; j < 8; j++) {
-        for (var k = 0; k < 8; k++) {
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 8; j++) {
+        for (let k = 0; k < 8; k++) {
           let m = this.sphereMaterial[Math.floor(Math.random() * 8)];
           let s = new THREE.Mesh(geometry, m);
           s.position.set(((i * bet) - offset), ((j * bet) - offset), ((k * bet) - offset));
@@ -144,7 +143,7 @@ export default class Roxik extends React.Component {
 
   /**
    * Resize operation handler, updating dimensions.
-   * Setting state will invalidate the component 
+   * Setting state will invalidate the component
    * and call `componentWillUpdate()`.
    */
   updateDimensions() {
@@ -155,7 +154,7 @@ export default class Roxik extends React.Component {
   }
 
   keydownHandler(event) {
-    var keyCode = event.which;
+    const keyCode = event.which;
     switch (keyCode) {
       case 49:
       case 97:

@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Main from './Main';
-import './App.scss';
+import './App.css';
 
-const App = () => (
-  <div className='app'>
-    <Main />
-  </div>
-);
+class App extends Component {
+  render() {
+    return (
+      <div className='app'>
+        <Main/>
+      </div>
+    );
+  }
+}
 
 export default App;

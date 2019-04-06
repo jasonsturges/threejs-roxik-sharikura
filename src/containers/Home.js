@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PageLayout from '../layouts/PageLayout';
 import Roxik from '../components/Roxik';
 import './Home.scss';
 
 const Home = () => (
-  <div className='home'>
+  <PageLayout>
     <h1 className='site-title'>Three.js Roxik Sharikura demo</h1>
     <Roxik />
-  </div>
+  </PageLayout>
 );
 
 export default Home;
