@@ -2,9 +2,11 @@
   "name": "threejs-roxik-sharikura",
   "description": "Three.js Roxik Sharikura demo",
   "author": "Jason Sturges",
+  "homepage": "https://jasonsturges.github.io/threejs-roxik-sharikura",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -13,6 +15,8 @@
     "three": "^0.103.0"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
