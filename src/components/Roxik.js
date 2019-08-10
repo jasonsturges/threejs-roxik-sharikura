@@ -1,7 +1,9 @@
 import React from 'react';
+import ResizeObserver from "resize-observer-polyfill";
 import CameraController from './CameraController';
 import MotionController from './MotionController';
 import * as THREE from 'three';
+import './Roxik.scss';
 
 export default class Roxik extends React.Component {
 
@@ -12,11 +14,6 @@ export default class Roxik extends React.Component {
     super(props);
 
     this.models = [];
-
-    this.state = {
-      width: window.innerWidth,
-      height: window.innerHeight
-    }
   }
 
   /**
@@ -32,11 +29,18 @@ export default class Roxik extends React.Component {
    * Initialization
    */
   componentDidMount() {
-    this.updateDimensions();
-    window.addEventListener("resize", this.updateDimensions.bind(this));
-
     this.initialize();
     this.animate();
+
+    this.observer = new ResizeObserver(entries => {
+      const {width, height} = entries[0].contentRect;
+      this.setState({
+        width: Math.floor(width),
+        height: Math.floor(height)
+      });
+    });
+
+    this.observer.observe(this.three);
   }
 
   initialize() {
@@ -141,18 +145,6 @@ export default class Roxik extends React.Component {
     this.renderer.render(this.scene, this.camera);
   }
 
-  /**
-   * Resize operation handler, updating dimensions.
-   * Setting state will invalidate the component
-   * and call `componentWillUpdate()`.
-   */
-  updateDimensions() {
-    this.setState({
-      width: window.innerWidth,
-      height: window.innerHeight
-    });
-  }
-
   keydownHandler(event) {
     const keyCode = event.which;
     switch (keyCode) {
@@ -188,14 +180,11 @@ export default class Roxik extends React.Component {
   }
 
   /**
-   * Invalidation handler, updating layout
+   * Invalidation handler
    */
-  componentWillUpdate() {
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    this.renderer.setSize(width, height);
-    this.camera.aspect = width / height;
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    this.renderer.setSize(this.state.width, this.state.height);
+    this.camera.aspect = this.state.width / this.state.height;
     this.camera.updateProjectionMatrix();
   }
 
@@ -203,7 +192,7 @@ export default class Roxik extends React.Component {
    * Dipose
    */
   componentWillUnmount() {
-    window.removeEventListener("resize", this.updateDimensions.bind(this));
+    this.observer.disconnect();
   }
 
 }

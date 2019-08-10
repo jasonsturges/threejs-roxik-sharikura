@@ -13,6 +13,7 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "resize-observer-polyfill": "^1.5.1",
     "three": "^0.107.0"
   },
   "scripts": {
