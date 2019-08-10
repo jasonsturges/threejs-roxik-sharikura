@@ -65,7 +65,7 @@ export default class MotionController {
     let d = (r * (Math.floor((Math.random() * 40) + 1)));
 
     for (let i = 0; i < this.models.length; i++) {
-      let m = this.models[i];
+      const m = this.models[i];
       m.speed = 0;
       m.accel = ((Math.random() * 0.05) + 0.022);
       m.animate = false;
@@ -251,8 +251,8 @@ export default class MotionController {
 
   step() {
     let m = null;
+    let maxp = null;
 
-    let maxp;
     switch (this.scene) {
       case this.CYLINDER:
       case this.SPHERE:

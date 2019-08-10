@@ -88,7 +88,7 @@ export default class Roxik extends React.Component {
     this.sphereMaterial = [];
 
     for (let i = 0; i < 8; i++) {
-      let mat = new THREE.MeshLambertMaterial({ color: colors[i] });
+      const mat = new THREE.MeshLambertMaterial({ color: colors[i] });
       this.sphereMaterial.push(mat);
     }
 
@@ -99,14 +99,13 @@ export default class Roxik extends React.Component {
   initializeObjects() {
     const bet = 0.7;
     const offset = (((8 - 1) * bet) * 0.5);
-
-    let geometry = new THREE.IcosahedronBufferGeometry(0.3, 2);
+    const geometry = new THREE.IcosahedronBufferGeometry(0.3, 2);
 
     for (let i = 0; i < 8; i++) {
       for (let j = 0; j < 8; j++) {
         for (let k = 0; k < 8; k++) {
-          let m = this.sphereMaterial[Math.floor(Math.random() * 8)];
-          let s = new THREE.Mesh(geometry, m);
+          const m = this.sphereMaterial[Math.floor(Math.random() * 8)];
+          const s = new THREE.Mesh(geometry, m);
           s.position.set(((i * bet) - offset), ((j * bet) - offset), ((k * bet) - offset));
 
           this.models.push(s);
