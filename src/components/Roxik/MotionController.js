@@ -2,26 +2,24 @@ import * as THREE from 'three';
 
 export default class MotionController {
 
-  constructor() {
-    this.CYLINDER = 0;
-    this.SPHERE = 1;
-    this.CUBE = 2;
-    this.TUBE = 3;
-    this.WAVE = 4;
-    this.GRAVITY = 5;
-    this.ANTIGRAVITY = 6;
+  static CYLINDER = 0;
+  static SPHERE = 1;
+  static CUBE = 2;
+  static TUBE = 3;
+  static WAVE = 4;
+  static GRAVITY = 5;
+  static ANTIGRAVITY = 6;
 
-    this.models = [];
+  models = [];
+  scene = MotionController.CYLINDER;
+  sceneLimit = 100;
+  frame = 0;
+  cutoff = 0;
+  r = 0.0;
+  r0 = 0.0;
+  rp = 0.0;
+  rl = 0.0;
 
-    this.scene = this.CYLINDER;
-    this.sceneLimit = 100;
-    this.frame = 0;
-    this.cutoff = 0;
-    this.r = 0.0;
-    this.r0 = 0.0;
-    this.rp = 0.0;
-    this.rl = 0.0;
-  }
 
   changeScene(scene, limit = -1) {
     this.cutoff = 0;
@@ -35,25 +33,25 @@ export default class MotionController {
     }
 
     switch (this.scene) {
-      case this.CYLINDER:
+      case MotionController.CYLINDER:
         this.cylinder();
         break;
-      case this.SPHERE:
+      case MotionController.SPHERE:
         this.sphere();
         break;
-      case this.CUBE:
+      case MotionController.CUBE:
         this.cube();
         break;
-      case this.TUBE:
+      case MotionController.TUBE:
         this.tube();
         break;
-      case this.WAVE:
+      case MotionController.WAVE:
         this.wave();
         break;
-      case this.GRAVITY:
+      case MotionController.GRAVITY:
         this.gravity();
         break;
-      case this.ANTIGRAVITY:
+      case MotionController.ANTIGRAVITY:
         this.antigravity();
         break;
     }
@@ -173,23 +171,21 @@ export default class MotionController {
   }
 
   wave() {
-    let m;
     const a = (Math.random() * 0.05) + 0.022;
-    let n = 0;
     const l = Math.floor(Math.sqrt(this.models.length));
     const d = ((-((l - 1)) * 0.55) * 0.5);
-    let r = 0;
     const t = (Math.random() * 0.3) + 0.05;
     const s = Math.random() + 1;
-
+    let m;
+    let n = 0;
     this.r = 0;
     this.r0 = 0;
     this.rl = Math.random() + 1;
     this.rp = (Math.random() * 0.3) + 0.1;
 
     for (let i = 0; i < l; i++) {
-      const ty = Math.cos(r) * s;
-      r += t;
+      const ty = Math.cos(this.r) * s;
+      this.r += t;
 
       for (let j = 0; j < l; j++) {
         n += 1;
@@ -254,10 +250,10 @@ export default class MotionController {
     let maxp = null;
 
     switch (this.scene) {
-      case this.CYLINDER:
-      case this.SPHERE:
-      case this.CUBE:
-      case this.TUBE:
+      case MotionController.CYLINDER:
+      case MotionController.SPHERE:
+      case MotionController.CUBE:
+      case MotionController.TUBE:
         for (let i = 0; i < this.cutoff; i++) {
           m = this.models[i];
 
@@ -288,7 +284,7 @@ export default class MotionController {
 
         break;
 
-      case this.WAVE:
+      case MotionController.WAVE:
         let cos = 0;
         let max = Math.floor(Math.sqrt(this.models.length));
         let cc = 0;
@@ -323,7 +319,7 @@ export default class MotionController {
 
         break;
 
-      case this.GRAVITY:
+      case MotionController.GRAVITY:
         for (let i = 0; i < this.models.length; i++) {
           m = this.models[i];
           m.position.y = m.position.y + m.dir.y;
@@ -337,7 +333,7 @@ export default class MotionController {
 
         break;
 
-      case this.ANTIGRAVITY:
+      case MotionController.ANTIGRAVITY:
         for (let i = 0; i < this.cutoff; i++) {
           m = this.models[i];
           m.position.x = m.position.x + m.dir.x;

@@ -2,23 +2,23 @@ import * as THREE from 'three';
 
 export default class CameraController {
 
-  constructor() {
-    this.camera = null;
-    this.models = [];
+  camera = null;
+  models = [];
+  frame = 1000;
+  sceneLimit = 90;
+  target = new THREE.Vector3(0, 0, 0);
+  tm = null;
+  cs = 0;
+  gy = 0;
+  l = 0;
+  bl = 6;
+  ts = 0;
+  r = 0;
+  rp = 0.03;
 
-    this.frame = 1000;
-    this.sceneLimit = 90;
-    this.tm = null;
-    this.target = new THREE.Vector3(0, 0, 0);
-    this.cs = 0;
-    this.gy = 0;
-    this.l = 0;
-    this.bl = 6;
-    this.ts = 0;
-    this.r = 0;
-    this.rp = 0.03;
-  }
-
+  /**
+   * Frame handler
+   */
   step() {
     if (++this.frame > this.sceneLimit) {
       this.frame = 0;

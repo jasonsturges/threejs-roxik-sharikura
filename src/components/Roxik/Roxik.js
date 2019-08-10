@@ -7,14 +7,8 @@ import './Roxik.scss';
 
 export default class Roxik extends React.Component {
 
-  /**
-   * Constructor
-   */
-  constructor(props) {
-    super(props);
+  models = [];
 
-    this.models = [];
-  }
 
   /**
    * Rendering
@@ -57,7 +51,7 @@ export default class Roxik extends React.Component {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0xfefefe);
 
-    this.renderer = new THREE.WebGLRenderer({ antialias: true });
+    this.renderer = new THREE.WebGLRenderer({antialias: true});
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.three.appendChild(this.renderer.domElement);
   }
@@ -88,11 +82,11 @@ export default class Roxik extends React.Component {
     this.sphereMaterial = [];
 
     for (let i = 0; i < 8; i++) {
-      const mat = new THREE.MeshLambertMaterial({ color: colors[i] });
+      const mat = new THREE.MeshLambertMaterial({color: colors[i]});
       this.sphereMaterial.push(mat);
     }
 
-    this.cubeMaterial = new THREE.MeshBasicMaterial({ color: 0xdddddd });
+    this.cubeMaterial = new THREE.MeshBasicMaterial({color: 0xdddddd});
     this.cubeMaterial.wireframe = true;
   }
 
@@ -122,7 +116,7 @@ export default class Roxik extends React.Component {
 
     this.motionController = new MotionController();
     this.motionController.models = this.models;
-    this.motionController.changeScene(this.motionController.CYLINDER);
+    this.motionController.changeScene(MotionController.CYLINDER);
   }
 
   initializeFilters() {
@@ -146,34 +140,35 @@ export default class Roxik extends React.Component {
 
   keydownHandler(event) {
     const keyCode = event.which;
+
     switch (keyCode) {
       case 49:
       case 97:
-        this.motionController.changeScene(this.motionController.CYLINDER);
+        this.motionController.changeScene(MotionController.CYLINDER);
         break;
       case 50:
       case 98:
-        this.motionController.changeScene(this.motionController.SPHERE);
+        this.motionController.changeScene(MotionController.SPHERE);
         break;
       case 51:
       case 99:
-        this.motionController.changeScene(this.motionController.CUBE);
+        this.motionController.changeScene(MotionController.CUBE);
         break;
       case 52:
       case 100:
-        this.motionController.changeScene(this.motionController.TUBE);
+        this.motionController.changeScene(MotionController.TUBE);
         break;
       case 53:
       case 101:
-        this.motionController.changeScene(this.motionController.WAVE);
+        this.motionController.changeScene(MotionController.WAVE);
         break;
       case 54:
       case 102:
-        this.motionController.changeScene(this.motionController.GRAVITY);
+        this.motionController.changeScene(MotionController.GRAVITY);
         break;
       case 55:
       case 103:
-        this.motionController.changeScene(this.motionController.ANTIGRAVITY);
+        this.motionController.changeScene(MotionController.ANTIGRAVITY);
         break;
     }
   }
