@@ -1,6 +1,6 @@
 import React from 'react';
 import PageLayout from '../layouts/PageLayout';
-import Roxik from '../components/Roxik';
+import Roxik from '../components/Roxik/Roxik';
 import './Home.scss';
 
 const Home = () => (
