@@ -1,11 +1,16 @@
 import React from 'react';
 import * as THREE from 'three';
-import ResizeObserver from "resize-observer-polyfill";
+import ResizeObserver from 'resize-observer-polyfill';
 import CameraController from './CameraController';
 import MotionController from './MotionController';
 import './Roxik.scss';
 
 export default class Roxik extends React.Component {
+
+  state = {
+    width: 512,
+    height: 410
+  };
 
   models = [];
 
