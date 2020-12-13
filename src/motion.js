@@ -13,7 +13,7 @@ export const MotionType = {
 
 let scene = MotionType.CYLINDER;
 let sceneLimit = 100;
-let frame = 0;
+let frameNumber = 0;
 let cutoff = 0;
 let r = 0.0;
 let r0 = 0.0;
@@ -23,7 +23,7 @@ let rl = 0.0;
 export const changeMotion = (newScene, limit = -1) => {
   cutoff = 0;
   scene = newScene;
-  frame = 0;
+  frameNumber = 0;
 
   if (limit < 0) {
     sceneLimit = Math.floor(Math.random() * 140 + 3);
@@ -348,5 +348,7 @@ export const stepMotion = () => {
       break;
   }
 
-  if (++frame > sceneLimit) changeMotion(Math.floor(Math.random() * 7));
+  if (++frameNumber > sceneLimit) {
+    changeMotion(Math.floor(Math.random() * 7));
+  }
 };
