@@ -146,9 +146,9 @@ const cube = () => {
 
 const tube = () => {
   const a = Math.random() * 0.05 + 0.022;
-  const v = 0.02 + Math.random() * 0.025;
+  const v = Math.random() * 0.025 + 0.02;
   const dx = -v * models.length * 0.44;
-  const d = 1.2 + Math.random();
+  const d = Math.random() + 1.2;
 
   for (let i = 0; i < models.length; i++) {
     const m = models[i];
