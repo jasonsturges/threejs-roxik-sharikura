@@ -4,7 +4,7 @@ import { models } from "./scene";
 let frame = 1000;
 let sceneLimit = 90;
 let target = new THREE.Vector3(0, 0, 0);
-let tm = null;
+let targetModel = null;
 let cs = 0;
 let gy = 0;
 let l = 0;
@@ -17,7 +17,7 @@ export const stepCamera = (camera) => {
   if (++frame > sceneLimit) {
     frame = 0;
     sceneLimit = Math.floor(Math.random() * 60 + 30);
-    tm = models[Math.floor(Math.random() * models.length)];
+    targetModel = models[Math.floor(Math.random() * models.length)];
     ts = 0;
     cs = 0;
     gy = Math.random() * 8 - 4;
@@ -33,18 +33,16 @@ export const stepCamera = (camera) => {
     cs += 0.005;
   }
 
-  target.x += (tm.position.x - target.x) * ts;
-  target.y += (tm.position.y - target.y) * ts;
-  target.z += (tm.position.z - target.z) * ts;
+  target.x += (targetModel.position.x - target.x) * ts;
+  target.y += (targetModel.position.y - target.y) * ts;
+  target.z += (targetModel.position.z - target.z) * ts;
 
   camera.lookAt(target);
 
   r += rp;
   l += (bl - l) * 0.1;
 
-  camera.position.x +=
-    (Math.cos(r) * l + tm.position.x - camera.position.x) * cs;
-  camera.position.y += (tm.position.y + gy - camera.position.y) * cs;
-  camera.position.z +=
-    (Math.sin(r) * l + tm.position.z - camera.position.z) * cs;
+  camera.position.x += (Math.cos(r) * l + targetModel.position.x - camera.position.x) * cs;
+  camera.position.y += (targetModel.position.y + gy - camera.position.y) * cs;
+  camera.position.z += (Math.sin(r) * l + targetModel.position.z - camera.position.z) * cs;
 };
