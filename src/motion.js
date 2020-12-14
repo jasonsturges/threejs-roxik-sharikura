@@ -309,26 +309,29 @@ export const stepMotion = () => {
           m.speed += m.accel;
         }
 
-        m.position.x = m.position.x + (m.dest.x - m.position.x) * m.speed;
-        m.position.y = m.position.y + (m.dest.y - m.position.y) * m.speed;
-        m.position.z = m.position.z + (m.dest.z - m.position.z) * m.speed;
+        m.position.x += (m.dest.x - m.position.x) * m.speed;
+        m.position.y += (m.dest.y - m.position.y) * m.speed;
+        m.position.z += (m.dest.z - m.position.z) * m.speed;
       }
 
       maxp = Math.floor(models.length / 40);
       cutoff += maxp;
-      if (cutoff > models.length) cutoff = models.length;
+
+      if (cutoff > models.length) {
+        cutoff = models.length;
+      }
 
       break;
 
     case MotionType.GRAVITY:
       for (let i = 0; i < models.length; i++) {
         m = models[i];
-        m.position.y = m.position.y + m.dir.y;
-        m.dir.y = m.dir.y - 0.06;
+        m.position.y += m.dir.y;
+        m.dir.y -= 0.06;
         if (m.position.y < -9) {
           m.position.y = -9;
-          m.dir.y = m.dir.y * -m.accel;
-          m.accel = m.accel * 0.9;
+          m.dir.y *= -m.accel;
+          m.accel *= 0.9;
         }
       }
 
@@ -337,13 +340,15 @@ export const stepMotion = () => {
     case MotionType.ANTIGRAVITY:
       for (let i = 0; i < cutoff; i++) {
         m = models[i];
-        m.position.x = m.position.x + m.dir.x;
-        m.position.y = m.position.y + m.dir.y;
-        m.position.z = m.position.z + m.dir.z;
+        m.position.x += m.dir.x;
+        m.position.y += m.dir.y;
+        m.position.z += m.dir.z;
       }
 
       cutoff += 30;
-      if (cutoff > models.length) cutoff = models.length;
+      if (cutoff > models.length) {
+        cutoff = models.length;
+      }
 
       break;
   }
