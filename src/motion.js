@@ -11,7 +11,7 @@ export const MotionType = {
   ANTIGRAVITY: 6,
 };
 
-let scene = MotionType.CUBE;
+let motionType = MotionType.CUBE;
 let sceneLimit = 100;
 let frameNumber = 0;
 let cutoff = 0;
@@ -21,8 +21,8 @@ let rp = 0.0;
 let rl = 0.0;
 
 export const changeMotion = (newScene, limit = -1) => {
+  motionType = newScene;
   cutoff = 0;
-  scene = newScene;
   frameNumber = 0;
 
   if (limit < 0) {
@@ -31,7 +31,7 @@ export const changeMotion = (newScene, limit = -1) => {
     sceneLimit = limit;
   }
 
-  switch (scene) {
+  switch (motionType) {
     case MotionType.CYLINDER:
       cylinder();
       break;
@@ -248,7 +248,7 @@ export const stepMotion = () => {
   let m = null;
   let maxp = null;
 
-  switch (scene) {
+  switch (motionType) {
     case MotionType.CYLINDER:
     case MotionType.SPHERE:
     case MotionType.CUBE:
