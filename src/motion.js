@@ -20,8 +20,7 @@ let r0 = 0.0;
 let rp = 0.0;
 let rl = 0.0;
 
-export const changeMotion = (newScene, limit = -1) => {
-  motionType = newScene;
+export const changeMotion = (motionType, limit = -1) => {
   cutoff = 0;
   frameNumber = 0;
 
@@ -57,6 +56,8 @@ export const changeMotion = (newScene, limit = -1) => {
 };
 
 const cylinder = () => {
+  motionType = MotionType.CYLINDER;
+
   let n = 0;
   let r = (Math.PI * 2) / models.length;
   let d = r * Math.floor(Math.random() * 40 + 1);
@@ -83,6 +84,8 @@ const cylinder = () => {
 };
 
 const sphere = () => {
+  motionType = MotionType.SPHERE;
+
   let s = 0;
   let c = 0;
   const r = (Math.PI * 2) / models.length;
@@ -114,6 +117,8 @@ const sphere = () => {
 };
 
 const cube = () => {
+  motionType = MotionType.CUBE;
+
   const a = Math.random() * 0.05 + 0.022;
   let n = 0;
   let l = 1;
@@ -145,6 +150,8 @@ const cube = () => {
 };
 
 const tube = () => {
+  motionType = MotionType.TUBE;
+
   const a = Math.random() * 0.05 + 0.022;
   const v = Math.random() * 0.025 + 0.02;
   const dx = -v * models.length * 0.44;
@@ -170,6 +177,8 @@ const tube = () => {
 };
 
 const wave = () => {
+  motionType = MotionType.WAVE;
+
   const a = Math.random() * 0.05 + 0.022;
   const l = Math.floor(Math.sqrt(models.length));
   const d = -(l - 1) * 0.55 * 0.5;
@@ -217,6 +226,7 @@ const wave = () => {
 };
 
 const gravity = () => {
+  motionType = MotionType.GRAVITY;
   sceneLimit = 60;
 
   for (let i = 0; i < models.length; i++) {
@@ -231,6 +241,8 @@ const gravity = () => {
 };
 
 const antigravity = () => {
+  motionType = MotionType.ANTIGRAVITY;
+
   for (let i = 0; i < models.length; i++) {
     const m = models[i];
     m.speed = 0;
