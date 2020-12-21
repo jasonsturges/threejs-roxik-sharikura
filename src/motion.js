@@ -1,15 +1,6 @@
 import * as THREE from "three";
 import { models } from "./scene";
-
-export const MotionType = {
-  CYLINDER: 0,
-  SPHERE: 1,
-  CUBE: 2,
-  TUBE: 3,
-  WAVE: 4,
-  GRAVITY: 5,
-  ANTIGRAVITY: 6,
-};
+import { MotionType } from "./MotionType";
 
 let motionType = MotionType.CUBE;
 let sceneLimit = 100;

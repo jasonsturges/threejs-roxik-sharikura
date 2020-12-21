@@ -1,4 +1,5 @@
-import { changeMotion, MotionType } from "./motion";
+import { changeMotion } from "./motion";
+import { MotionType } from "./MotionType";
 
 const keydownHandler = (event) => {
   const keyCode = event.key;

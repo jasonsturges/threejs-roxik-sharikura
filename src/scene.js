@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { stepCamera } from "./camera";
-import { changeMotion, MotionType, stepMotion } from "./motion";
+import { changeMotion, stepMotion } from "./motion";
+import { MotionType } from "./MotionType";
 import "./keyboard";
 
 let renderer;
