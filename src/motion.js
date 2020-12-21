@@ -268,9 +268,9 @@ export const stepMotion = () => {
           m.position.y = m.position.y + c1 * m.speed;
           m.position.z = m.position.z + c2 * m.speed;
           if (
-            Math.abs(c0) < 0.05 &&
-            Math.abs(c1) < 0.05 &&
-            Math.abs(c2) < 0.05
+              Math.abs(c0) < 0.05 &&
+              Math.abs(c1) < 0.05 &&
+              Math.abs(c2) < 0.05
           ) {
             m.animate = true;
             m.position.x = m.dest.x;
