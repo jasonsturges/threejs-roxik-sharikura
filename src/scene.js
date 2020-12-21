@@ -75,7 +75,7 @@ const cubeMaterial = new THREE.MeshBasicMaterial({
 const cubeMesh = new THREE.Mesh(cube, cubeMaterial);
 scene.add(cubeMesh);
 
-changeMotion(MotionType.CYLINDER);
+changeMotion(MotionType.CUBE);
 
 export const createScene = (el) => {
   renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el });

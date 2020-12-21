@@ -11,7 +11,7 @@ export const MotionType = {
   ANTIGRAVITY: 6,
 };
 
-let scene = MotionType.CYLINDER;
+let scene = MotionType.CUBE;
 let sceneLimit = 100;
 let frameNumber = 0;
 let cutoff = 0;
