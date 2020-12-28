@@ -66,17 +66,8 @@ const cube = () => {
   motionType = MotionType.CUBE;
 
   const a = Math.random() * 0.05 + 0.022;
+  const l = Math.cbrt(models.length);
   let n = 0;
-  let l = 1;
-
-  while (true) {
-    if (l * l * l > models.length) {
-      l--;
-      break;
-    }
-
-    l++;
-  }
 
   for (let i = 0; i < l; i++) {
     for (let j = 0; j < l; j++) {
