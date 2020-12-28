@@ -252,9 +252,9 @@ export const stepMotion = () => {
   let maxp = null;
 
   switch (motionType) {
+    case MotionType.CUBE:
     case MotionType.CYLINDER:
     case MotionType.SPHERE:
-    case MotionType.CUBE:
     case MotionType.TUBE:
       for (let i = 0; i < cutoff; i++) {
         m = models[i];
