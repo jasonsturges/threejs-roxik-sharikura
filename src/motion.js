@@ -22,26 +22,26 @@ export const changeMotion = (motionType, limit = -1) => {
   }
 
   switch (motionType) {
-    case MotionType.CYLINDER:
-      cylinder();
-      break;
-    case MotionType.SPHERE:
-      sphere();
+    case MotionType.ANTIGRAVITY:
+      antigravity();
       break;
     case MotionType.CUBE:
       cube();
+      break;
+    case MotionType.CYLINDER:
+      cylinder();
+      break;
+    case MotionType.GRAVITY:
+      gravity();
+      break;
+    case MotionType.SPHERE:
+      sphere();
       break;
     case MotionType.TUBE:
       tube();
       break;
     case MotionType.WAVE:
       wave();
-      break;
-    case MotionType.GRAVITY:
-      gravity();
-      break;
-    case MotionType.ANTIGRAVITY:
-      antigravity();
       break;
   }
 };
