@@ -46,6 +46,70 @@ export const changeMotion = (motionType, limit = -1) => {
   }
 };
 
+const antigravity = () => {
+  motionType = MotionType.ANTIGRAVITY;
+
+  for (let i = 0; i < models.length; i++) {
+    const m = models[i];
+    m.speed = 0;
+    m.accel = 0.5;
+    m.animate = false;
+    m.dir = new THREE.Vector3();
+
+    m.dir.x = Math.random() * 0.25 - 0.125;
+    m.dir.y = Math.random() * 0.25 - 0.125;
+    m.dir.z = Math.random() * 0.25 - 0.125;
+  }
+};
+
+const cube = () => {
+  motionType = MotionType.CUBE;
+
+  const a = Math.random() * 0.05 + 0.022;
+  let n = 0;
+  let l = 1;
+
+  while (true) {
+    if (l * l * l > models.length) {
+      l--;
+      break;
+    }
+
+    l++;
+  }
+
+  for (let i = 0; i < l; i++) {
+    for (let j = 0; j < l; j++) {
+      for (let k = 0; k < l; k++) {
+        const m = models[n++];
+        m.speed = 0;
+        m.accel = a;
+        m.animate = false;
+        m.dest = new THREE.Vector3();
+
+        m.dest.x = i * 0.8 + -(l - 1) * 0.8 * 0.5;
+        m.dest.y = j * 0.8 + -(l - 1) * 0.8 * 0.5;
+        m.dest.z = k * 0.8 + -(l - 1) * 0.8 * 0.5;
+      }
+    }
+  }
+};
+
+const gravity = () => {
+  motionType = MotionType.GRAVITY;
+  sceneLimit = 60;
+
+  for (let i = 0; i < models.length; i++) {
+    const m = models[i];
+    m.dir = new THREE.Vector3();
+
+    m.speed = 0;
+    m.accel = 0.5;
+    m.animate = false;
+    m.dir.y = Math.random() * -0.2;
+  }
+};
+
 const cylinder = () => {
   motionType = MotionType.CYLINDER;
 
@@ -104,39 +168,6 @@ const sphere = () => {
 
     s = s + r;
     c = c + d;
-  }
-};
-
-const cube = () => {
-  motionType = MotionType.CUBE;
-
-  const a = Math.random() * 0.05 + 0.022;
-  let n = 0;
-  let l = 1;
-
-  while (true) {
-    if (l * l * l > models.length) {
-      l--;
-      break;
-    }
-
-    l++;
-  }
-
-  for (let i = 0; i < l; i++) {
-    for (let j = 0; j < l; j++) {
-      for (let k = 0; k < l; k++) {
-        const m = models[n++];
-        m.speed = 0;
-        m.accel = a;
-        m.animate = false;
-        m.dest = new THREE.Vector3();
-
-        m.dest.x = i * 0.8 + -(l - 1) * 0.8 * 0.5;
-        m.dest.y = j * 0.8 + -(l - 1) * 0.8 * 0.5;
-        m.dest.z = k * 0.8 + -(l - 1) * 0.8 * 0.5;
-      }
-    }
   }
 };
 
@@ -216,37 +247,6 @@ const wave = () => {
   }
 };
 
-const gravity = () => {
-  motionType = MotionType.GRAVITY;
-  sceneLimit = 60;
-
-  for (let i = 0; i < models.length; i++) {
-    const m = models[i];
-    m.dir = new THREE.Vector3();
-
-    m.speed = 0;
-    m.accel = 0.5;
-    m.animate = false;
-    m.dir.y = Math.random() * -0.2;
-  }
-};
-
-const antigravity = () => {
-  motionType = MotionType.ANTIGRAVITY;
-
-  for (let i = 0; i < models.length; i++) {
-    const m = models[i];
-    m.speed = 0;
-    m.accel = 0.5;
-    m.animate = false;
-    m.dir = new THREE.Vector3();
-
-    m.dir.x = Math.random() * 0.25 - 0.125;
-    m.dir.y = Math.random() * 0.25 - 0.125;
-    m.dir.z = Math.random() * 0.25 - 0.125;
-  }
-};
-
 export const stepMotion = () => {
   let m = null;
   let maxp = null;
@@ -289,6 +289,35 @@ export const stepMotion = () => {
 
       break;
 
+    case MotionType.ANTIGRAVITY:
+      for (let i = 0; i < cutoff; i++) {
+        m = models[i];
+        m.position.x += m.dir.x;
+        m.position.y += m.dir.y;
+        m.position.z += m.dir.z;
+      }
+
+      cutoff += 30;
+      if (cutoff > models.length) {
+        cutoff = models.length;
+      }
+
+      break;
+
+    case MotionType.GRAVITY:
+      for (let i = 0; i < models.length; i++) {
+        m = models[i];
+        m.position.y += m.dir.y;
+        m.dir.y -= 0.06;
+        if (m.position.y < -9) {
+          m.position.y = -9;
+          m.dir.y *= -m.accel;
+          m.accel *= 0.9;
+        }
+      }
+
+      break;
+
     case MotionType.WAVE:
       let cos = 0;
       let max = Math.floor(Math.sqrt(models.length));
@@ -320,35 +349,6 @@ export const stepMotion = () => {
       maxp = Math.floor(models.length / 40);
       cutoff += maxp;
 
-      if (cutoff > models.length) {
-        cutoff = models.length;
-      }
-
-      break;
-
-    case MotionType.GRAVITY:
-      for (let i = 0; i < models.length; i++) {
-        m = models[i];
-        m.position.y += m.dir.y;
-        m.dir.y -= 0.06;
-        if (m.position.y < -9) {
-          m.position.y = -9;
-          m.dir.y *= -m.accel;
-          m.accel *= 0.9;
-        }
-      }
-
-      break;
-
-    case MotionType.ANTIGRAVITY:
-      for (let i = 0; i < cutoff; i++) {
-        m = models[i];
-        m.position.x += m.dir.x;
-        m.position.y += m.dir.y;
-        m.position.z += m.dir.z;
-      }
-
-      cutoff += 30;
       if (cutoff > models.length) {
         cutoff = models.length;
       }
