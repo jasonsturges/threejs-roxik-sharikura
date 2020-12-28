@@ -95,21 +95,6 @@ const cube = () => {
   }
 };
 
-const gravity = () => {
-  motionType = MotionType.GRAVITY;
-  sceneLimit = 60;
-
-  for (let i = 0; i < models.length; i++) {
-    const m = models[i];
-    m.dir = new THREE.Vector3();
-
-    m.speed = 0;
-    m.accel = 0.5;
-    m.animate = false;
-    m.dir.y = Math.random() * -0.2;
-  }
-};
-
 const cylinder = () => {
   motionType = MotionType.CYLINDER;
 
@@ -135,6 +120,21 @@ const cylinder = () => {
     }
 
     n = n + d;
+  }
+};
+
+const gravity = () => {
+  motionType = MotionType.GRAVITY;
+  sceneLimit = 60;
+
+  for (let i = 0; i < models.length; i++) {
+    const m = models[i];
+    m.dir = new THREE.Vector3();
+
+    m.speed = 0;
+    m.accel = 0.5;
+    m.animate = false;
+    m.dir.y = Math.random() * -0.2;
   }
 };
 
