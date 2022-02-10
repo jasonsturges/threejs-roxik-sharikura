@@ -1,6 +1,13 @@
 {
   "name": "three-roxik-sharikura",
   "version": "1.0.0",
+  "description": "Recreation of Roxik Sharikura performance example in Three.js\n\n",
+  "author": "Jason Sturges <jason@jsonsturges.com> (https://jasonsturges.com)",
+  "homepage": "https://jasonsturges.github.io/threejs-roxik-sharikura/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonsturges/threejs-roxik-sharikura"
+  },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
