@@ -8,6 +8,9 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "three": "^0.158.0"
+  },
   "devDependencies": {
     "prettier": "^3.0.3",
     "typescript": "^5.0.2",
