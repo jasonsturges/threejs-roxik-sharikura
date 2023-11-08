@@ -1,30 +1,15 @@
 {
-  "name": "three-roxik-sharikura",
-  "version": "1.0.0",
-  "description": "Recreation of Roxik Sharikura performance example in Three.js\n\n",
-  "author": "Jason Sturges <jason@jsonsturges.com> (https://jasonsturges.com)",
-  "homepage": "https://jasonsturges.github.io/threejs-roxik-sharikura/",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jasonsturges/threejs-roxik-sharikura"
-  },
+  "name": "threejs-roxik-sharikura",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
-    "start": "sirv public"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^21.0.1",
-    "@rollup/plugin-node-resolve": "^13.1.3",
-    "rollup": "^2.67.1",
-    "rollup-plugin-css-only": "^3.1.0",
-    "rollup-plugin-livereload": "^2.0.5",
-    "rollup-plugin-svelte": "^7.1.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "svelte": "^3.46.4"
-  },
-  "dependencies": {
-    "sirv-cli": "^2.0.2",
-    "three": "^0.137.5"
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
   }
 }
