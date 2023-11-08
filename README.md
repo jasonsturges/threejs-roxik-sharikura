@@ -11,10 +11,8 @@ Install the dependencies...
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+...then start:
 
 ```bash
 npm run dev
 ```
-
-Navigate to [localhost:5000](http://localhost:5000), where you should see the app running.
