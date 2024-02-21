@@ -38,11 +38,11 @@ export const changeMotion = (motionType: MotionType, limit = -1) => {
     case MotionType.SPHERE:
       sphere();
       break;
-    case MotionType.TUBE:
-      tube();
+    case MotionType.LINE:
+      line();
       break;
-    case MotionType.WAVE:
-      wave();
+    case MotionType.PLANE:
+      plane();
       break;
     default:
       console.error(`Invalid motion type: ${motionType}`);
@@ -166,8 +166,8 @@ const sphere = () => {
   }
 };
 
-const tube = () => {
-  motionType = MotionType.TUBE;
+const line = () => {
+  motionType = MotionType.LINE;
 
   const a = Math.random() * 0.05 + 0.022;
   const v = Math.random() * 0.025 + 0.02;
@@ -193,8 +193,8 @@ const tube = () => {
   }
 };
 
-const wave = () => {
-  motionType = MotionType.WAVE;
+const plane = () => {
+  motionType = MotionType.PLANE;
 
   const a = Math.random() * 0.05 + 0.022;
   const l = Math.floor(Math.sqrt(models.length));
@@ -250,7 +250,7 @@ export const motionFrameHandler = () => {
     case MotionType.CUBE:
     case MotionType.CYLINDER:
     case MotionType.SPHERE:
-    case MotionType.TUBE:
+    case MotionType.LINE:
       for (let i = 0; i < cutoff; i++) {
         m = models[i];
 
@@ -309,7 +309,7 @@ export const motionFrameHandler = () => {
 
       break;
 
-    case MotionType.WAVE:
+    case MotionType.PLANE:
       let cos = 0;
       let max = Math.floor(Math.sqrt(models.length));
       let cc = 0;

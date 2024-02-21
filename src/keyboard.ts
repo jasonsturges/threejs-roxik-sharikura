@@ -15,10 +15,10 @@ const keydownHandler = (event: KeyboardEvent) => {
       changeMotion(MotionType.CUBE, 90);
       break;
     case "4":
-      changeMotion(MotionType.TUBE, 90);
+      changeMotion(MotionType.LINE, 90);
       break;
     case "5":
-      changeMotion(MotionType.WAVE, 90);
+      changeMotion(MotionType.PLANE, 90);
       break;
     case "6":
       changeMotion(MotionType.GRAVITY, 90);
