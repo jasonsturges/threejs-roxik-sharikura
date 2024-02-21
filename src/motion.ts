@@ -7,10 +7,10 @@ let motionType = MotionType.CUBE;
 let sceneLimit = 100;
 let frameNumber = 0;
 let cutoff = 0;
-let r = 0.0;
-let r0 = 0.0;
-let rp = 0.0;
-let rl = 0.0;
+let waveRadius = 0.0;
+let waveRadiusInitial = 0.0;
+let waveRadiusIncrement = 0.0;
+let waveLength = 0.0;
 
 export const changeMotion = (motionType: MotionType, limit = -1) => {
   cutoff = 0;
@@ -203,14 +203,14 @@ const wave = () => {
   const s = Math.random() + 1;
   let m;
   let n = 0;
-  r = 0;
-  r0 = 0;
-  rl = Math.random() + 1;
-  rp = Math.random() * 0.3 + 0.1;
+  waveRadius = 0;
+  waveRadiusInitial = 0;
+  waveLength = Math.random() + 1;
+  waveRadiusIncrement = Math.random() * 0.3 + 0.1;
 
   for (let i = 0; i < l; i++) {
-    const ty = Math.cos(r) * s;
-    r += t;
+    const ty = Math.cos(waveRadius) * s;
+    waveRadius += t;
 
     for (let j = 0; j < l; j++) {
       n += 1;
@@ -315,16 +315,16 @@ export const motionFrameHandler = () => {
       let cc = 0;
 
       for (let i = 0; i < max; i++) {
-        cos = Math.cos(r) * rl;
-        r = r + rp;
+        cos = Math.cos(waveRadius) * waveLength;
+        waveRadius = waveRadius + waveRadiusIncrement;
         for (let j = 0; j < max; j++) {
           m = models[cc++];
           m.dest.y = cos;
         }
       }
 
-      r0 += 0.11;
-      r = r0;
+      waveRadiusInitial += 0.11;
+      waveRadius = waveRadiusInitial;
 
       for (let i = 0; i < cutoff; i++) {
         m = models[i];
