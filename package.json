@@ -1,7 +1,11 @@
 {
   "name": "threejs-roxik-sharikura",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Recreation of Roxik Sharikura performance example in Three.js",
+  "author": "Jason Sturges <jason@jsonsturges.com> (https://jasonsturges.com)",
+  "homepage": "https://jasonsturges.github.io/threejs-roxik-sharikura",
+  "repository": "github:jasonsturges/threejs-roxik-sharikura",
+  "license": "ISC",
   "type": "module",
   "scripts": {
     "dev": "vite --open",
